@@ -1,0 +1,113 @@
+.top-models-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+}
+
+.top-model-card {
+    width: 350px;
+    background: linear-gradient(135deg, #2a2a2a, #1e1e1e);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.5s ease;
+    border: 1px solid #444;
+    position: relative;
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+.top-model-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.top-model-card:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.top-model-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 123, 255, 0.2);
+    border-color: #007bff;
+}
+
+.model-image-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    background: #1a1a1a;
+}
+
+.model-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.top-model-card:hover .model-image {
+    transform: scale(1.1);
+}
+
+.model-content {
+    padding: 20px;
+}
+
+.model-content h3 {
+    color: #007bff;
+    margin-bottom: 10px;
+    font-size: 1.3em;
+    transition: color 0.3s ease;
+}
+
+.top-model-card:hover .model-content h3 {
+    color: #00bfff;
+}
+
+.model-content p {
+    color: #ccc;
+    margin-bottom: 15px;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+.model-meta {
+    display: flex;
+    justify-content: space-between;
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.model-category {
+    display: inline-block;
+    background: rgba(0, 123, 255, 0.2);
+    color: #66b3ff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Адаптивность для топовых моделей */
+@media (max-width: 768px) {
+    .top-models-container {
+        gap: 20px;
+    }
+    
+    .top-model-card {
+        width: 100%;
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    .model-image-container {
+        height: 180px;
+    }
+    
+    .model-content {
+        padding: 15px;
+    }
+}

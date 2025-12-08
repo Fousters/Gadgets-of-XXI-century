@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="icon.png">
+    <script src="form.js" defer></script>
+    <title>Гаджеты XXI века</title>
+</head>
+<body>
+    <header>
+        <input type="checkbox" id="burger-toggle" class="burger-checkbox">
+        <label for="burger-toggle" class="burger-label">
+            <span></span>
+        </label>
+        
+        <nav>
+            <ul class="main-nav">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="smartphones.html">Смартфоны</a></li>
+                <li><a href="consoles.html">Консоли</a></li>
+                <li><a href="smartwatches.html">Смартчасы</a></li>
+                <li><a href="#">Форма</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <div class="header-title">Гаджеты XXI века</div>
+        </section>
+    <section id="форма">
+        <h2>Форма обратной связи</h2>
+        <div class="content-block form-container">
+            <form method="post" action="#" class="contact-form">
+                <fieldset>
+                    <legend>Личная информация</legend>
+                    
+                    <div class="form-group">
+                        <label for="fullname">ФИО</label>
+                        <input type="text" id="fullname" name="fullname" placeholder="Введите ваше полное имя" required pattern="[А-Яа-яЁё\s]{2,}">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Телефон</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+7 (999) 999-99-99" required pattern="[\+]\d{1}\s?[\(]{0,1}\d{3}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="example@mail.com" required>
+                    </div>
+                                        
+                    <div class="form-group">
+                        <label for="meeting">Дата и время встречи</label>
+                        <input type="datetime-local" id="meeting" name="meeting" min="2025-01-01T00:00" max="2026-12-31T23:59">
+                    </div>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>Предпочтения в гаджетах</legend>
+                    
+                    <div class="form-group">
+                        <label class="form-group-label">Какие гаджеты вас интересуют?</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="smartphone" name="gadgets" value="smartphone">
+                                <span class="checkmark"></span>
+                                Смартфоны
+                            </label>
+                            
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="smartwatch" name="gadgets" value="smartwatch">
+                                <span class="checkmark"></span>
+                                Умные часы
+                            </label>
+                            
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="laptop" name="gadgets" value="laptop">
+                                <span class="checkmark"></span>
+                                Ноутбуки
+                            </label>
+                            
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="console" name="gadgets" value="console">
+                                <span class="checkmark"></span>
+                                Игровые консоли
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-group-label">Уровень знаний о технологиях</label>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" id="beginner" name="level" value="beginner" checked>
+                                <span class="radiomark"></span>
+                                Начинающий
+                            </label>
+                            
+                            <label class="radio-item">
+                                <input type="radio" id="intermediate" name="level" value="intermediate">
+                                <span class="radiomark"></span>
+                                Средний
+                            </label>
+                            
+                            <label class="radio-item">
+                                <input type="radio" id="advanced" name="level" value="advanced">
+                                <span class="radiomark"></span>
+                                Продвинутый
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="brand">Предпочитаемый бренд</label>
+                        <select id="brand" name="brand" required>
+                            <option value="" disabled selected>Выберите бренд</option>
+                            <option value="apple">Apple</option>
+                            <option value="samsung">Samsung</option>
+                            <option value="xiaomi">Xiaomi</option>
+                            <option value="sony">Sony</option>
+                            <option value="other">Другой</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="multiple-brands">Любимые бренды (можно выбрать несколько с помощью Ctrl/Cmd)</label>
+                        <select id="multiple-brands" name="multiple-brands[]" multiple size="4">
+                            <option value="apple">Apple</option>
+                            <option value="samsung">Samsung</option>
+                            <option value="xiaomi">Xiaomi</option>
+                            <option value="sony">Sony</option>
+                            <option value="huawei">Huawei</option>
+                            <option value="google">Google</option>
+                        </select>
+                        <small class="form-hint">Удерживайте Ctrl (Cmd на Mac) для выбора нескольких вариантов</small>
+                    </div>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>Дополнительная информация</legend>
+                    
+                    <div class="form-group">
+                        <label for="file">Загрузите фото вашего гаджета</label>
+                        <input type="file" id="file" name="file" accept="image/*">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Ваше сообщение</label>
+                        <textarea id="message" name="message" cols="40" rows="5" 
+                                  placeholder="Расскажите о ваших предпочтениях в гаджетах..." 
+                                  minlength="10" maxlength="500" required></textarea>
+                    </div>
+                </fieldset>
+                
+                <div class="form-buttons">
+                    <button type="submit" class="btn-primary">Отправить</button>
+                    <button type="reset" class="btn-secondary">Очистить форму</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <footer>
+    <div class="footer-grid">
+        <div class="footer-column">
+            <h4>Гаджеты XXI века</h4>
+            <p>Современные технологии для современной жизни. Обзоры, новости и советы по выбору гаджетов.</p>
+        </div>
+        <div class="footer-column">
+            <h4>Контакты</h4>
+            <div class="contact-info">
+                <p>📧 devicecontact@email.com</p>
+                <br><p>📞 +7 (999) 148-81-337</p>
+                <br><p>📍 Москва, ул. Технологическая, 15</p>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 Гаджеты XXI века. Студент ИКБО-23-24 Сухорученко Андрей Сергеевич</p>
+        <p>Сайт создан в учебных целях</p>
+    </div>
+</footer>
+</body>
+</html>
