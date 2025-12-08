@@ -21,18 +21,73 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Валидация телефона
     function formatPhoneNumber(input) {
-        let value = input.value.replace(/\D/g, '');
-        
-        if (value.length > 0) {
-            value = '+7 (' + value;
-            if (value.length > 7) value = value.slice(0, 7) + ') ' + value.slice(7);
-            if (value.length > 12) value = value.slice(0, 12) + '-' + value.slice(12);
-            if (value.length > 15) value = value.slice(0, 15) + '-' + value.slice(15);
-            if (value.length > 18) value = value.slice(0, 18);
-        }
-        
-        input.value = value;
+    let value = input.value.replace(/\D/g, '');
+    
+    // Если номер начинается с 8, меняем на 7
+    if (value.startsWith('8')) {
+        value = '7' + value.slice(1);
     }
+    // Если номер не начинается с 7, добавляем 7
+    else if (!value.startsWith('7') && value.length > 0) {
+        value = '7' + value;
+    }
+    
+    // Ограничиваем длину 11 цифр
+    if (value.length > 11) {
+        value = value.slice(0, 11);
+    }
+    
+    let formattedValue = '';
+    
+    if (value.length > 0) {
+        formattedValue = '+7';
+        
+        if (value.length > 1) {
+            formattedValue += ' (' + value.slice(1, 4);
+        }
+        if (value.length > 4) {
+            formattedValue += ') ' + value.slice(4, 7);
+        }
+        if (value.length > 7) {
+            formattedValue += '-' + value.slice(7, 9);
+        }
+        if (value.length > 9) {
+            formattedValue += '-' + value.slice(9, 11);
+        }
+    }
+    
+    input.value = formattedValue;
+    
+    updatePhoneCounter(input, value.length);
+}
+
+function updatePhoneCounter(input, currentLength) {
+    let counter = input.parentNode.querySelector('.phone-counter');
+    
+    if (!counter) {
+        counter = document.createElement('div');
+        counter.className = 'phone-counter';
+        counter.style.cssText = `
+            text-align: right;
+            font-size: 14px;
+            margin-top: 5px;
+            min-height: 20px;
+        `;
+        input.parentNode.appendChild(counter);
+    }
+    
+    counter.textContent = `${currentLength}/11 цифр`;
+    
+    if (currentLength < 11) {
+        counter.style.color = '#dc3545';
+        counter.textContent += ' (неполный номер)';
+    } else if (currentLength === 11) {
+        counter.style.color = '#28a745';
+        counter.textContent += ' ✓';
+    } else {
+        counter.style.color = '#ffc107';
+    }
+}
         
     // Валидация формы
     function validateField(field) {
@@ -119,6 +174,70 @@ document.addEventListener('DOMContentLoaded', function() {
     // Имитация отправки формы
     function simulateFormSubmit(e) {
         e.preventDefault();
+
+        const phoneField = document.getElementById('phone');
+    if (phoneField && phoneField.hasAttribute('required')) {
+        const phoneDigits = phoneField.value.replace(/\D/g, '');
+        
+        // Проверяем длину номера
+        if (phoneDigits.length !== 11) {
+            const formGroup = phoneField.closest('.form-group');
+            let errorElement = formGroup.querySelector('.error-message');
+            
+            if (!errorElement) {
+                errorElement = document.createElement('div');
+                errorElement.className = 'error-message';
+                errorElement.style.cssText = `
+                    color: #dc3545;
+                    font-size: 14px;
+                    margin-top: 5px;
+                    padding: 5px;
+                    background: rgba(220, 53, 69, 0.1);
+                    border-radius: 4px;
+                    border-left: 3px solid #dc3545;
+                `;
+                formGroup.appendChild(errorElement);
+            }
+            
+            errorElement.textContent = 'Номер телефона должен содержать ровно 11 цифр';
+            phoneField.style.borderColor = '#dc3545';
+            phoneField.style.boxShadow = '0 0 0 3px rgba(220, 53, 69, 0.2)';
+            
+            // Прокрутка к ошибке
+            phoneField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            phoneField.focus();
+            return; // Прерываем отправку
+        }
+        
+        // Проверяем, что номер начинается с 7
+        if (!phoneDigits.startsWith('7')) {
+            const formGroup = phoneField.closest('.form-group');
+            let errorElement = formGroup.querySelector('.error-message');
+            
+            if (!errorElement) {
+                errorElement = document.createElement('div');
+                errorElement.className = 'error-message';
+                errorElement.style.cssText = `
+                    color: #dc3545;
+                    font-size: 14px;
+                    margin-top: 5px;
+                    padding: 5px;
+                    background: rgba(220, 53, 69, 0.1);
+                    border-radius: 4px;
+                    border-left: 3px solid #dc3545;
+                `;
+                formGroup.appendChild(errorElement);
+            }
+            
+            errorElement.textContent = 'Номер должен начинаться с 7 (например: +7 (999) 999-99-99)';
+            phoneField.style.borderColor = '#dc3545';
+            phoneField.style.boxShadow = '0 0 0 3px rgba(220, 53, 69, 0.2)';
+            
+            phoneField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            phoneField.focus();
+            return;
+        }
+    }
         
         // Проверяем все обязательные поля
         let isValid = true;
